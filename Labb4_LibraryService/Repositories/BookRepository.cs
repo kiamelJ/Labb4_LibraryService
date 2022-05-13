@@ -20,13 +20,7 @@ namespace Labb4_LibraryService.Repositories
         {
             get
             {
-                //Det är nåt med Customer_Books tror jag för det är den som
-                //bråkade när jag gjorde en join också
-
-                //return _libContext.Customer_Books.Include(b => b.Book).ToList();
-
                 return _libContext.Books.ToList();
-
             }
         }
     }

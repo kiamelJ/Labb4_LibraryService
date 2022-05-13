@@ -111,10 +111,18 @@ namespace Labb4_LibraryService.Controllers
 
         //TEST SEARCH FUNCTIONALITY
 
-        public IActionResult Details(int id)
+        public IActionResult Filter(string searchString)
         {
-            var customer = _customerRepo.GetCustomerById(id);
-            return View(customer);
+            var personList = _customerRepo.GetAllCustomers;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = personList.Where(n => n.Id.ToString() == searchString).ToList();
+                //(searchString) || n.LastName.Contains(searchString)).ToList();
+                return View("Search", filteredResult);
+            }
+
+            return View(personList);
         }
     }
 }

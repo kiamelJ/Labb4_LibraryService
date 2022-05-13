@@ -15,7 +15,5 @@ namespace Labb4_LibraryService.Interfaces
         Customer CreateCustomer(Customer newCustomer);
         void DeleteCustomer(Customer customer);
         Customer UpdateCustomer(Customer customer);
-
-        IEnumerable<Customer> Search(string name);
     }
 }

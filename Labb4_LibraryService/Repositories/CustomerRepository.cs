@@ -55,16 +55,5 @@ namespace Labb4_LibraryService.Repositories
             }
             return customer;
         }
-
-        public IEnumerable<Customer> Search(string name)
-        {
-            IQueryable<Customer> query = _libContext.Customers;
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                query = query.Where(c => c.Name.Contains(name));
-            }
-            return query.ToList();
-        }
     }
 }
