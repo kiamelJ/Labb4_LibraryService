@@ -1,5 +1,6 @@
 ﻿using Labb4_LibraryService.Interfaces;
 using Labb4_LibraryService.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,53 +8,22 @@ using System.Threading.Tasks;
 
 namespace Labb4_LibraryService.Repositories
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : EntityBaseRepository<Customer>, ICustomerRepository
     {
-        private readonly LibDbContext _libContext;
-        public CustomerRepository(LibDbContext libContext)
+        private readonly LibDbContext _context;
+        public CustomerRepository(LibDbContext context) : base(context)
         {
-            _libContext = libContext;
-        }
-        
-        public IEnumerable<Customer> GetAllCustomers
-        {
-            get
-            {
-                return _libContext.Customers.ToList();
-            }
+            _context = context;
         }
 
-        public Customer CreateCustomer(Customer newCustomer)
+        public async Task<Customer> GetCustomerByIdAsync(int id)
         {
-            _libContext.Customers.Add(newCustomer);
-            _libContext.SaveChanges();
-            return newCustomer;
-        }
+            var personDetails = await _context.Customers
+                .Include(pb => pb.Customer_Books)
+                .ThenInclude(b => b.Book)
+                .FirstOrDefaultAsync(n => n.Id == id);
 
-        public void DeleteCustomer(Customer customer)
-        {
-            _libContext.Customers.Remove(customer);
-            _libContext.SaveChanges();
-        }
-
-        public Customer GetCustomerById(int id)
-        {
-            return _libContext.Customers.FirstOrDefault(c => c.Id == id);
-        }
-
-        public Customer UpdateCustomer(Customer customer)
-        {
-            var existingCustomer = _libContext.Customers.Find(customer.Id);
-            if (existingCustomer != null)
-            {
-                existingCustomer.Name = customer.Name;
-                existingCustomer.Phone = customer.Phone;
-                existingCustomer.Email = customer.Email;
-
-                _libContext.Customers.Update(existingCustomer);
-                _libContext.SaveChanges();
-            }
-            return customer;
+            return personDetails;
         }
     }
 }

@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace Labb4_LibraryService.Interfaces
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IEntityBaseRepository<Customer>
     {
-        //Man kan alltså skriva så här också?
-        //Jag är ju van att skriva GetAllCustomers();
-        IEnumerable<Customer> GetAllCustomers { get; }
-        Customer GetCustomerById(int id);
-        Customer CreateCustomer(Customer newCustomer);
-        void DeleteCustomer(Customer customer);
-        Customer UpdateCustomer(Customer customer);
+        Task<Customer> GetCustomerByIdAsync(int id);
     }
 }

@@ -12,117 +12,116 @@ namespace Labb4_LibraryService.Controllers
     public class CustomerController : Controller
     {
         //Dependency Injection
-        private readonly ICustomerRepository _customerRepo;
-        private readonly IBookRepository _bookRepo;
-        public CustomerController(ICustomerRepository customerRepo, IBookRepository bookRepo)
+        private readonly ICustomerRepository _context;
+        public CustomerController(ICustomerRepository context)
         {
-            _customerRepo = customerRepo;
-            _bookRepo = bookRepo;
+            _context = context;
         }
 
-       
 
-        //GET ALL CUSTOMER
-        public IActionResult List()
+
+        //GET: Person/Details/1
+        public async Task<IActionResult> Details(int id)
         {
-            var customerList = _customerRepo.GetAllCustomers;
-            return View(customerList);
+            var personDetail = await _context.GetCustomerByIdAsync(id);
+            return View(personDetail);
         }
+
+        //GET ALL PERSONS
+        public async Task<IActionResult> List()
+        {
+            var personList = await _context.GetAllAsync();
+            return View(personList);
+        }
+
 
         //*******************************************************************************************
 
-        //Den här hör till Create så att sidan visas tom först utan varningar om validering
+        //GET
         public IActionResult CreateCustomer()
         {
+
             return View();
         }
 
-        //CREATE NEW CUSTOMER
+        //POST
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult CreateCustomer(Customer customer)
+        public async Task<IActionResult> CreateCustomer(Customer newPerson)
         {
             if (ModelState.IsValid)
             {
-                _customerRepo.CreateCustomer(customer);
+                await _context.AddAsync(newPerson);
                 return RedirectToAction("List");
+
             }
-            return View(customer);
-        }
-
-        //********************************************************************************************
-
-        //GET - GetById
-        public IActionResult GetCustomer(int id)
-        {
-            var customer = _customerRepo.GetCustomerById(id);
-            return View(customer);
+            return View(newPerson);
         }
 
         //********************************************************************************************
 
         // Först hämtar man personen sedan editerar man. Samma nedan i Delete
 
-
-        //GET - Edit
-        public IActionResult EditCustomer(int id)
+        //GET - EDIT
+        public async Task<IActionResult> EditCustomer(int id)
         {
-            var customerToEdit = _customerRepo.GetCustomerById(id);
-            return View(customerToEdit);
+            
+            var customerToDelete = await _context.GetByIdAsync(id);
+
+            return View(customerToDelete);
         }
 
-        //POST - Edit
+        //POST - EDIT
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult EditCustomer(Customer customer)
+        public async Task<IActionResult> EditCustomer(int id, [Bind("Id, Name, Phone, Email")] Customer person)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _customerRepo.UpdateCustomer(customer);
-                return RedirectToAction("List");
+                return View(person);
             }
-            return View(customer);
+            await _context.UpdateAsync(id, person);
+            return RedirectToAction(nameof(List));
+
         }
 
         //********************************************************************************************
 
         //Först hämtar vi personen sedan deletar vi den
 
-        //GET - Delete
-        public IActionResult DeleteCustomer(int id)
+        //GET - DELETE
+        public async Task<IActionResult> DeleteCustomer(int id)
         {
-            var customerToDel = _customerRepo.GetCustomerById(id);
-            return View(customerToDel);
+            
+            var personToDelete = await _context.GetByIdAsync(id);
+
+            return View(personToDelete);
         }
 
-        //POST - Delete
+        //POST - DELETE
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var customerToDelete = _customerRepo.GetCustomerById(id);
+            var customerDetails = await _context.GetByIdAsync(id);
+            if (customerDetails == null) return View("NotFound");
+            await _context.DeleteAsync(id);
 
-            _customerRepo.DeleteCustomer(customerToDelete);
             return RedirectToAction("List");
-                
         }
 
         //*************************************************************************
 
         //TEST SEARCH FUNCTIONALITY
 
-        public IActionResult Filter(string searchString)
+        public async Task<IActionResult> Filter(string searchString)
         {
-            var personList = _customerRepo.GetAllCustomers;
+            var customerList = await _context.GetAllAsync();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filteredResult = personList.Where(n => n.Id.ToString() == searchString).ToList();
-                //(searchString) || n.LastName.Contains(searchString)).ToList();
+                var filteredResult = customerList.Where(n => n.Id.ToString() == searchString).ToList();
                 return View("Search", filteredResult);
             }
 
-            return View(personList);
+            return View(customerList);
         }
     }
 }

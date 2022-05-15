@@ -1,0 +1,72 @@
+﻿
+@model Customer
+
+@{
+    ViewData["Title"] = "Person details";
+}
+
+<div class="row">
+
+    
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-dark">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name Details
+
+
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <p>Bild på @Model.Name </p>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text"></p>
+                        <p class="card-text"></p>
+
+                        <p class="card-text">
+                            <b>Borrowed Books: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var customer in Model.Customer_Books)
+                                {
+                                    <div>
+                                        <ul>
+                                            <li>
+                                                @customer.Book.Titel
+                                            </li>
+                                        </ul>
+                                    </div>                              
+                                }
+                            </div>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        
+                        <div class="col">
+                            <a asp-action="List" class="btn btn-outline-primary float-right">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-12">
+                    <div class="card-footer ">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="List">
+                                Back to List
+                            </a>
+                        </p>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>

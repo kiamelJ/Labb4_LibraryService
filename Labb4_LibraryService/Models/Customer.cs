@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Labb4_LibraryService.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Labb4_LibraryService.Models
 {
-    public class Customer
+    public class Customer : IEntityBase
     {
         [Key]
         public int Id { get; set; }
