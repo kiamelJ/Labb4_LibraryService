@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Labb4_LibraryService.Interfaces
 {
-    public interface IBookRepository
+    public interface IBookRepository : IEntityBaseRepository<Book>
     {
-        IEnumerable<Book> GetAllBooks { get;  }
+        Task<Book> GetBookByIdAsync(int id);
     }
 }

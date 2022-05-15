@@ -11,21 +11,20 @@ namespace Labb4_LibraryService.Controllers
     public class BookController : Controller
     {
 
-        //DI
-        private readonly IBookRepository _bookRepo;
-        private readonly ICustomerRepository _customerRepo;
-        public BookController(IBookRepository bookRepo, ICustomerRepository customerRepo)
+        //Dependency Injection
+        private readonly IBookRepository _context;
+        public BookController(IBookRepository context)
         {
-            _bookRepo = bookRepo;
-            _customerRepo = customerRepo;
+            _context = context;
         }
 
 
 
-        public IActionResult BookList()
-        {
 
-            var bookList = _bookRepo.GetAllBooks;
+
+        public async Task<IActionResult> BookList()
+        {
+            var bookList = await _context.GetAllAsync();
             return View(bookList);
         }
     }
