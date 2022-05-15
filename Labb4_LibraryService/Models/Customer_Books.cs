@@ -16,7 +16,7 @@ namespace Labb4_LibraryService.Models
         public Book Book { get; set; }
 
         [Required]
-        public DateTime? BorrowDate { get; set; }
+        public DateTime BorrowDate { get; set; }
         public DateTime? ReturnDate { get; set; }
         [Required]
         public bool IsBorrowed { get; set; }

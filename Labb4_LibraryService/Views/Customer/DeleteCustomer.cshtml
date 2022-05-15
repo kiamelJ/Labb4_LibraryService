@@ -1,9 +1,10 @@
 ﻿@model Customer
 
+@{
+    ViewData["Titel"] = "Delete Customer";
+}
 
 <form method="post" asp-action="Delete">
-
-    @*Det här asp-for pekar mot den propertien vi vill att den ska länka mot*@
     <input asp-for="Id" hidden />
     <div class="border p-3">
 
@@ -59,7 +60,6 @@
 </form>
 
 
-@*Client side validation. Server side is the "asp-validation-summary" som finns typ nästan högst upp*@
 @section Scripts
 {
     @{

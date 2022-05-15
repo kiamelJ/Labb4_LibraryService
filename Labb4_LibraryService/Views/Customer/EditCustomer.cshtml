@@ -1,5 +1,8 @@
 ﻿@model Customer
 
+@{
+    ViewData["Titel"] = "Edit Customer";
+}
 
 <form method="post">
     <input asp-for="Id" hidden />
@@ -58,8 +61,6 @@
 
 </form>
 
-
-@*Client side validation. Server side is the "asp-validation-summary" som finns typ nästan högst upp*@
 @section Scripts
 {
     @{

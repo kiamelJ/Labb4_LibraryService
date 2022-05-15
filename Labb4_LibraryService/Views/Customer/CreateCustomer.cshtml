@@ -1,5 +1,8 @@
 ﻿@model Customer
 
+@{
+    ViewData["Titel"] = "Create Customer";
+}
 
 <form method="post" asp-action="CreateCustomer">
     <div class="border p-3">
@@ -36,6 +39,7 @@
                     </div>
                     <div class="col-8">
                         <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -58,7 +62,7 @@
 </form>
 
 
-@*Client side validation. Server side is the "asp-validation-summary" som finns typ nästan högst upp*@
+
 @section Scripts
 {
     @{

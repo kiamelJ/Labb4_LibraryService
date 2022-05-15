@@ -11,11 +11,15 @@ namespace Labb4_LibraryService.Models
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [StringLength(40, MinimumLength = 2, ErrorMessage = "Max character is 40 and min character is 2")]
+
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 chars")]
         public string Name { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Phone is required")]
         public string Phone { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; }
 
 

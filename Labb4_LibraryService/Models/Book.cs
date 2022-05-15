@@ -15,6 +15,7 @@ namespace Labb4_LibraryService.Models
         public string Titel { get; set; }
         [Required]
         public string Author { get; set; }
+        public string ImageURL { get; set; }
 
 
         //Nav Prop n:m

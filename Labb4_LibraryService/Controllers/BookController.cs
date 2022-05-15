@@ -1,5 +1,4 @@
 ﻿using Labb4_LibraryService.Interfaces;
-using Labb4_LibraryService.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,11 +20,18 @@ namespace Labb4_LibraryService.Controllers
 
 
 
-
+        //GET ALL BOOKS
         public async Task<IActionResult> BookList()
         {
             var bookList = await _context.GetAllAsync();
             return View(bookList);
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var bookDetail = await _context.GetBookByIdAsync(id);
+            return View(bookDetail);
+        }
+
     }
 }

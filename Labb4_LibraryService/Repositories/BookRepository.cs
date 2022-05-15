@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace Labb4_LibraryService.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : EntityBaseRepository<Book>, IBookRepository
     {
-        private readonly LibDbContext _libContext;
-        public BookRepository(LibDbContext libContext)
+        private readonly LibDbContext _context;
+        public BookRepository(LibDbContext context) : base(context)
         {
-            _libContext = libContext;
+            _context = context;
         }
 
-        public IEnumerable<Book> GetAllBooks
+        public async Task<Book> GetBookByIdAsync(int id)
         {
-            get
-            {
-                return _libContext.Books.ToList();
-            }
+            var bookDetails = await _context.Books
+                .Include(pb => pb.Customer_Books)
+                .ThenInclude(c => c.Customer)
+                .FirstOrDefaultAsync(n => n.Id == id);
+
+            return bookDetails;
         }
     }
 }

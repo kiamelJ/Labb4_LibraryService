@@ -38,11 +38,11 @@ namespace Labb4_LibraryService.Models
 
             mb.Entity<Book>()
                 .HasData(
-                new Book { Id = 1, Titel = "Drönarhjärta", Author = "Lars Wilderäng"},
-                new Book { Id = 2, Titel = "Jakten på Röd Oktober", Author = "Tom Clancy"},
-                new Book { Id = 3, Titel = "Höstsol", Author = "Lars Wilderäng"},
-                new Book { Id = 4, Titel = "Sagan om Ringen", Author = "J.R.R. Tolkien"},
-                new Book { Id = 5, Titel = "Harry Potter och Fenixorden", Author = "J.K. Rowling"}
+                new Book { Id = 1, Titel = "Drönarhjärta", Author = "Lars Wilderäng", ImageURL = "\\Images\\dronarhjarta.jpg"},
+                new Book { Id = 2, Titel = "Jakten på Röd Oktober", Author = "Tom Clancy", ImageURL ="\\Images\\jaktrodokt.jpg"},
+                new Book { Id = 3, Titel = "Höstsol", Author = "Lars Wilderäng", ImageURL = "\\Images\\hostsol.jpg"},
+                new Book { Id = 4, Titel = "Sagan om Ringen", Author = "J.R.R. Tolkien", ImageURL = "\\Images\\saganomringen.jpg"},
+                new Book { Id = 5, Titel = "Harry Potter och Fenixorden", Author = "J.K. Rowling", ImageURL = "\\Images\\hpfenix.jpg"}
                 );
 
             mb.Entity<Customer_Books>()

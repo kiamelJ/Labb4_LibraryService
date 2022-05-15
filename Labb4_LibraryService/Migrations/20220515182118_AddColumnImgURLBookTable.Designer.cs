@@ -4,14 +4,16 @@ using Labb4_LibraryService.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Labb4_LibraryService.Migrations
 {
     [DbContext(typeof(LibDbContext))]
-    partial class LibDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220515182118_AddColumnImgURLBookTable")]
+    partial class AddColumnImgURLBookTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,35 +48,30 @@ namespace Labb4_LibraryService.Migrations
                         {
                             Id = 1,
                             Author = "Lars Wilderäng",
-                            ImageURL = "\\Images\\dronarhjarta.jpg",
                             Titel = "Drönarhjärta"
                         },
                         new
                         {
                             Id = 2,
                             Author = "Tom Clancy",
-                            ImageURL = "\\Images\\jaktrodokt.jpg",
                             Titel = "Jakten på Röd Oktober"
                         },
                         new
                         {
                             Id = 3,
                             Author = "Lars Wilderäng",
-                            ImageURL = "\\Images\\hostsol.jpg",
                             Titel = "Höstsol"
                         },
                         new
                         {
                             Id = 4,
                             Author = "J.R.R. Tolkien",
-                            ImageURL = "\\Images\\saganomringen.jpg",
                             Titel = "Sagan om Ringen"
                         },
                         new
                         {
                             Id = 5,
                             Author = "J.K. Rowling",
-                            ImageURL = "\\Images\\hpfenix.jpg",
                             Titel = "Harry Potter och Fenixorden"
                         });
                 });

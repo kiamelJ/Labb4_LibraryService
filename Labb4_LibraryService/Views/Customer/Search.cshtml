@@ -3,17 +3,6 @@
 
 
 <div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h2 class="text-secondary font-weight-light">Person List</h2>
-        </div>
-        <div class="col-6 text-right">
-            <a asp-controller="Customer" asp-action="CreateCustomer" class="btn btn-secondary">
-                Create New Person
-            </a>
-
-        </div>
-    </div>
 
     <br /><br />
 
@@ -35,7 +24,7 @@
                         Email
                     </th>
                     <th>
-                        Borrowed Books (går att få till?)
+
                     </th>
                 </tr>
             </thead>
@@ -47,7 +36,15 @@
                         <td width="20%">@person.Name</td>
                         <td width="20%">@person.Phone</td>
                         <td width="20%">@person.Email</td>
-                        <td width="20%"></td>
+                        <td width="20%" class="text-center">
+                            <div class="w-75 btn-group" role="group">
+
+                                <a asp-controller="Customer" asp-route-id="@person.Id" asp-action="Details" class="btn btn-primary mx-2">
+                                    Details
+                                </a>
+
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -55,7 +52,14 @@
     }
     else
     {
-        <p>No Person exists</p>
+        <div class="row">
+            <div class="col-md-6 offset-3">
+                <h1 class="text-danger">Customer does not exist...</h1>
+                <hr />
+                <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index">Return</a>
+            </div>
+
+        </div>
     }
 </div>
 

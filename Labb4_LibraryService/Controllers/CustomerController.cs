@@ -1,6 +1,5 @@
 ﻿using Labb4_LibraryService.Interfaces;
 using Labb4_LibraryService.Models;
-using Labb4_LibraryService.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,19 +18,18 @@ namespace Labb4_LibraryService.Controllers
         }
 
 
+        //GET ALL PERSONS
+        public async Task<IActionResult> List()
+        {
+            var personList = await _context.GetAllAsync();
+            return View(personList);
+        }
 
         //GET: Person/Details/1
         public async Task<IActionResult> Details(int id)
         {
             var personDetail = await _context.GetCustomerByIdAsync(id);
             return View(personDetail);
-        }
-
-        //GET ALL PERSONS
-        public async Task<IActionResult> List()
-        {
-            var personList = await _context.GetAllAsync();
-            return View(personList);
         }
 
 
@@ -46,7 +44,7 @@ namespace Labb4_LibraryService.Controllers
 
         //POST
         [HttpPost]
-        public async Task<IActionResult> CreateCustomer(Customer newPerson)
+        public async Task<IActionResult> CreateCustomer([Bind("Id, Name, Phone, Email")]Customer newPerson)
         {
             if (ModelState.IsValid)
             {

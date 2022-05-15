@@ -2,7 +2,7 @@
 @model Book
 
 @{
-    ViewData["Title"] = "Person details";
+    ViewData["Title"] = "Book details";
 }
 
 <div class="row">
@@ -15,15 +15,16 @@
                     <div class="card-header text-white bg-dark">
                         <p class="card-text">
                             <h5 class="card-title">
-                                @Model. Details
-
-
+                                @Model.Titel by @Model.Author
                             </h5>
                         </p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <p>Bild på @Model.Name </p>
+                    <div class="p-5">
+                       <img src="@Model.ImageURL" alt="Cover image of @Model.Titel" style="max-width: 150px"/>
+                    </div>
+                    
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -31,41 +32,34 @@
                         <p class="card-text"></p>
 
                         <p class="card-text">
-                            <b>Borrowed Books: </b>
+                            <b>Status: </b>
                             <hr />
-                            <div class="row">
+                            <div>
                                 @foreach (var customer in Model.Customer_Books)
                                 {
                                     <div>
-                                        <ul>
-                                            <li>
-                                                @customer.Book.Titel
-                                            </li>
-                                        </ul>
-                                    </div>                              
+                                        @if (customer.ReturnDate == null)
+                                        {
+                                            <span class="btn bg-danger text-white">Borrowed</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="btn bg-info text-white">Available</span>
+                                        }
+                                    </div>
                                 }
                             </div>
                         </p>
 
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-12">
-                        
-                        <div class="col">
-                            <a asp-action="List" class="btn btn-outline-primary float-right">Back to List</a>
-                        </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4 p-2">
+                    <div class="col">
+                        <a asp-action="BookList" class="btn btn-success w-100 float-right">Back to Book List</a>
                     </div>
                 </div>
-                @*<div class="col-md-12">
-                    <div class="card-footer ">
-                        <p class="card-text">
-                            <a class="btn btn-outline-primary float-right" asp-action="List">
-                                Back to List
-                            </a>
-                        </p>
-                    </div>
-                </div>*@
             </div>
         </div>
     </div>

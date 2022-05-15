@@ -44,7 +44,7 @@
                         <td width="20%">@customer.Phone</td>
                         <td width="20%">@customer.Email</td>
                         <td width="20%" class="text-center">
-                            <div class="w-75 btn-group" role="group">
+                            <div class="w-100 btn-group" role="group">
                                 <a asp-controller="Customer" asp-route-Id="@customer.Id" asp-action="EditCustomer" class="btn btn-primary mx-2">
                                     Edit
                                 </a>
@@ -63,7 +63,7 @@
     }
     else
     {
-        <p>No Person exists</p>
+        <p>Customer does not exist</p>
     }
 </div>
 
