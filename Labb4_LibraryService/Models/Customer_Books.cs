@@ -17,13 +17,6 @@ namespace Labb4_LibraryService.Models
 
         [Required]
         public DateTime BorrowDate { get; set; }
-        public DateTime? ReturnDate { get; set; }
-        [Required]
-        public bool IsBorrowed { get; set; }
-
-
-        
-        
-        
+        public DateTime? ReturnDate { get; set; }  
     }
 }

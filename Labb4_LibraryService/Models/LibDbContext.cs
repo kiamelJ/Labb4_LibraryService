@@ -47,11 +47,11 @@ namespace Labb4_LibraryService.Models
 
             mb.Entity<Customer_Books>()
                 .HasData(
-                new Customer_Books {  CustomerId = 2, BookId = 1, BorrowDate = new DateTime(1999, 03, 13), ReturnDate = new DateTime(1999, 04, 07), IsBorrowed = false},
-                new Customer_Books {  CustomerId = 3, BookId = 4, BorrowDate = new DateTime(2002, 10, 05), ReturnDate = new DateTime(2002, 10, 27), IsBorrowed = false},
-                new Customer_Books {  CustomerId = 1, BookId = 2, BorrowDate = new DateTime(2022, 10, 05), IsBorrowed = true},
-                new Customer_Books {  CustomerId = 5, BookId = 3, BorrowDate = new DateTime(2022, 01, 13), ReturnDate = new DateTime(2022, 01, 30), IsBorrowed = false },
-                new Customer_Books {  CustomerId = 4, BookId = 5, BorrowDate = new DateTime(2022, 04, 15), IsBorrowed = true}
+                new Customer_Books {  CustomerId = 2, BookId = 1, BorrowDate = new DateTime(1999, 03, 13), ReturnDate = new DateTime(1999, 04, 07) },
+                new Customer_Books {  CustomerId = 3, BookId = 4, BorrowDate = new DateTime(2002, 10, 05), ReturnDate = new DateTime(2002, 10, 27) },
+                new Customer_Books {  CustomerId = 1, BookId = 2, BorrowDate = new DateTime(2022, 10, 05) },
+                new Customer_Books {  CustomerId = 5, BookId = 3, BorrowDate = new DateTime(2022, 01, 13), ReturnDate = new DateTime(2022, 01, 30) },
+                new Customer_Books {  CustomerId = 4, BookId = 5, BorrowDate = new DateTime(2022, 04, 15) }
                 );
         }
     }
