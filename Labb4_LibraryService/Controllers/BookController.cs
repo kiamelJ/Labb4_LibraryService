@@ -10,7 +10,7 @@ namespace Labb4_LibraryService.Controllers
     public class BookController : Controller
     {
 
-        //Dependency Injection
+        
         private readonly IBookRepository _context;
         public BookController(IBookRepository context)
         {
@@ -19,8 +19,6 @@ namespace Labb4_LibraryService.Controllers
 
 
 
-
-        //GET ALL BOOKS
         public async Task<IActionResult> BookList()
         {
             var bookList = await _context.GetAllAsync();

@@ -10,7 +10,7 @@ namespace Labb4_LibraryService.Controllers
 {
     public class CustomerController : Controller
     {
-        //Dependency Injection
+        
         private readonly ICustomerRepository _context;
         public CustomerController(ICustomerRepository context)
         {
@@ -18,14 +18,14 @@ namespace Labb4_LibraryService.Controllers
         }
 
 
-        //GET ALL PERSONS
+        
         public async Task<IActionResult> List()
         {
             var personList = await _context.GetAllAsync();
             return View(personList);
         }
 
-        //GET: Person/Details/1
+        
         public async Task<IActionResult> Details(int id)
         {
             var personDetail = await _context.GetCustomerByIdAsync(id);
@@ -33,16 +33,13 @@ namespace Labb4_LibraryService.Controllers
         }
 
 
-        //*******************************************************************************************
-
-        //GET
         public IActionResult CreateCustomer()
         {
 
             return View();
         }
 
-        //POST
+        
         [HttpPost]
         public async Task<IActionResult> CreateCustomer([Bind("Id, Name, Phone, Email")]Customer newPerson)
         {
@@ -55,11 +52,7 @@ namespace Labb4_LibraryService.Controllers
             return View(newPerson);
         }
 
-        //********************************************************************************************
-
-        // Först hämtar man personen sedan editerar man. Samma nedan i Delete
-
-        //GET - EDIT
+        
         public async Task<IActionResult> EditCustomer(int id)
         {
             
@@ -68,7 +61,7 @@ namespace Labb4_LibraryService.Controllers
             return View(customerToDelete);
         }
 
-        //POST - EDIT
+        
         [HttpPost]
         public async Task<IActionResult> EditCustomer(int id, [Bind("Id, Name, Phone, Email")] Customer person)
         {
@@ -81,11 +74,7 @@ namespace Labb4_LibraryService.Controllers
 
         }
 
-        //********************************************************************************************
-
-        //Först hämtar vi personen sedan deletar vi den
-
-        //GET - DELETE
+        
         public async Task<IActionResult> DeleteCustomer(int id)
         {
             
@@ -94,7 +83,7 @@ namespace Labb4_LibraryService.Controllers
             return View(personToDelete);
         }
 
-        //POST - DELETE
+        
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -105,9 +94,6 @@ namespace Labb4_LibraryService.Controllers
             return RedirectToAction("List");
         }
 
-        //*************************************************************************
-
-        //TEST SEARCH FUNCTIONALITY
 
         public async Task<IActionResult> Filter(string searchString)
         {
